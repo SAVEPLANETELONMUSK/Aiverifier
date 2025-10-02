@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Verifier - Safe Video & Link Authenticity Checker</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://img.icons8.com/ios-filled/50/1a73e8/inspection.png" type="image/png">
+
+  <!-- Meta SEO -->
+  <meta name="description" content="AI Verifier helps you check YouTube, Instagram, and Facebook links to spot fake or AI-generated media. Safe Links, Real News.">
+  <meta name="keywords" content="AI Verifier, fake video checker, safe links, video authenticity, YouTube verifier, Instagram verifier, Facebook verifier">
+  <meta name="author" content="AI Verifier Team">
+
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="AI Verifier - Safe Video & Link Authenticity Checker">
+  <meta property="og:description" content="Paste YouTube, Instagram, or Facebook links and verify authenticity instantly. Safe Links, Real News.">
+  <meta property="og:image" content="https://img.icons8.com/ios-filled/200/1a73e8/inspection.png">
+  <meta property="og:url" content="https://aiverifier.com">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Verifier - Safe Video & Link Authenticity Checker">
+  <meta name="twitter:description" content="Verify YouTube, Instagram, or Facebook links instantly. Safe Links, Real News.">
+  <meta name="twitter:image" content="https://img.icons8.com/ios-filled/200/1a73e8/inspection.png">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9fafc;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+    header {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+    header img {
+      width: 60px;
+      margin-bottom: 10px;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      margin: 0;
+      font-weight: 700;
+      color: #111;
+    }
+    .search-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px auto;
+      max-width: 650px;
+      padding: 20px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: 40px;
+      outline: none;
+      margin-bottom: 15px;
+      transition: border 0.2s ease;
+    }
+    .search-box input:focus {
+      border-color: #0056d6;
+    }
+    .search-box button {
+      padding: 12px 32px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: #0056d6;
+      color: #fff;
+      transition: background 0.2s ease;
+    }
+    .search-box button:hover {
+      background: #003f9c;
+    }
+    .platforms {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 30px auto;
+      flex-wrap: wrap;
+    }
+    .platforms img {
+      width: 50px;
+      transition: transform 0.2s ease;
+    }
+    .platforms img:hover {
+      transform: scale(1.1);
+    }
+    section {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      font-size: 1.05rem;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+      color: #111;
+    }
+    footer {
+      text-align: center;
+      margin: 50px 20px 20px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    footer a {
+      color: #0056d6;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    .error-message {
+      text-align: center;
+      color: red;
+      font-weight: bold;
+      margin-top: 10px;
+      display: none;
+    }
+    /* Floating Verify Button */
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0056d6;
+      color: #fff;
+      padding: 14px 30px;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: background 0.2s ease;
+      z-index: 999;
+    }
+    .floating-btn:hover {
+      background: #003f9c;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://img.icons8.com/ios-filled/100/1a73e8/inspection.png" alt="AI Verifier Logo">
+    <h1>AI Verifier</h1>
+  </header>
+
+  <div class="search-box">
+    <input type="text" id="linkInput" placeholder="Paste YouTube, Instagram, or Facebook link...">
+    <button onclick="verifyLink()">Verify</button>
+    <div id="error" class="error-message">Invalid link, please try again.</div>
+  </div>
+
+  <div class="platforms">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook">
+  </div>
+
+  <section>
+    <h2>Why Choose AI Verifier?</h2>
+    <p>
+      <strong>AI Verifier</strong> is your trusted tool for spotting fake, cloned, or AI-generated media.  
+      We help everyone — especially the elderly or less tech-savvy — stay safe online.  
+      By instantly checking the authenticity of videos and links, AI Verifier reduces the spread of misinformation and helps you know what’s real.
+    </p>
+  </section>
+
+  <section>
+    <h2>How It Works</h2>
+    <ol>
+      <li>Copy any YouTube, Instagram, or Facebook link.</li>
+      <li>Paste it in the AI Verifier search box above.</li>
+      <li>Click <b>Verify</b> to check authenticity before sharing or believing it.</li>
+    </ol>
+  </section>
+
+  <footer>
+    © 2025 AI Verifier | Safe Links, Real News<br>
+    By using this service you accept our <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a>
+  </footer>
+
+  <!-- Floating Verify Button -->
+  <div class="floating-btn" onclick="scrollToVerify()">🔍 Verify Now</div>
+
+  <script>
+    function verifyLink() {
+      const input = document.getElementById('linkInput').value.trim();
+      const errorDiv = document.getElementById('error');
+      errorDiv.style.display = "none";
+
+      const yt = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/i;
+      const ig = /^(https?:\/\/)?(www\.)?instagram\.com\/.+$/i;
+      const fb = /^(https?:\/\/)?(www\.)?facebook\.com\/.+$/i;
+
+      if (yt.test(input) || ig.test(input) || fb.test(input)) {
+        window.location.href = input;
+      } else {
+        errorDiv.style.display = "block";
+      }
+    }
+
+    function scrollToVerify() {
+      document.getElementById('linkInput').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('linkInput').focus();
+    }
+  </script>
+</body>
+</html>

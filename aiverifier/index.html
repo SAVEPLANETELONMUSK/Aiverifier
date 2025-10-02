@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Verifier</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 350px;
+    text-align: center;
+}
+h1 { font-size: 24px; margin-bottom: 5px; }
+p.subtitle { color: #555; margin-bottom: 20px; }
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+.platforms { margin-bottom: 20px; }
+.platforms button {
+    padding: 6px 12px;
+    margin: 2px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
+.platforms button.active { background-color: #0056b3; }
+button.verify {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.result { margin-top: 20px; text-align: left; display: none; }
+.result img { width: 100%; border-radius: 8px; margin-bottom: 10px; }
+.result h3 { margin: 5px 0; }
+.result p { margin: 5px 0; color: #555; }
+.continue-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+footer {
+    margin-top: 25px;
+    font-size: 10px;
+    color: #888;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>🔍 AI Verifier</h1>
+    <p class="subtitle">Safe Video Link Verification</p>
+    
+    <input type="text" id="linkInput" placeholder="Paste video link here...">
+    
+    <div class="platforms">
+        <button class="platform active" data-platform="YouTube">YouTube</button>
+        <button class="platform" data-platform="Facebook">Facebook</button>
+        <button class="platform" data-platform="Instagram">Instagram</button>
+        <button class="platform" data-platform="X">X</button>
+    </div>
+    
+    <button class="verify" onclick="verifyLink()">Verify</button>
+    
+    <div class="result" id="result">
+        <img src="https://via.placeholder.com/350x180.png?text=Thumbnail" alt="Thumbnail">
+        <h3>Status: ✅ Human-made</h3>
+        <h3 id="videoTitle">Title: Sample Title from Link</h3>
+        <p id="videoDescription">Description: This link appears to be safe and from the platform.</p>
+        <a href="#" class="continue-btn" target="_blank">Continue to Video</a>
+    </div>
+    
+    <footer>
+        Verification powered by AI Verifier | Protecting you against fake news, altered videos, and AI-generated content.<br>
+        © 2025 AI Verifier | Safe Links, Real News
+    </footer>
+</div>
+
+<script>
+const platformButtons = document.querySelectorAll('.platform');
+platformButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        platformButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    });
+});
+
+function verifyLink() {
+    const link = document.getElementById('linkInput').value.trim();
+    if (!link) {
+        alert('Please enter a video link to verify.');
+        return;
+    }
+    // Placeholder logic for testing
+    const resultDiv = document.getElementById('result');
+    document.getElementById('videoTitle').innerText = 'Title: Sample Title from Link';
+    document.getElementById('videoDescription').innerText = 'Description: This link appears to be safe and from the platform.';
+    resultDiv.style.display = 'block';
+}
+</script>
+</body>
+</html>

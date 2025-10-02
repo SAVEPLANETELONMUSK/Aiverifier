@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Verifier — Safe Video & Link Authenticity Checker</title>
+  <meta name="description" content="Use AI Verifier to check if a video or social link is authentic, fake, or AI-generated. Fast, secure & free." />
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: linear-gradient(120deg,#0c1b3c,#1e88e5); color:#333; }
+    header { text-align:center; color:#fff; padding:60px 20px; }
+    header h1 { margin:0; font-size:2.8rem; }
+    header p { margin:10px 0 0; font-size:1.1rem; }
+    .container { max-width:960px; background:#fff; margin:-40px auto 40px; padding:28px; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.12); }
+    .input-group { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
+    .input-group input { flex:1; padding:14px; border:1px solid #dce7fb; border-radius:8px; font-size:1rem; }
+    .input-group button { padding:14px 22px; border:none; border-radius:8px; background:#1e88e5; color:#fff; cursor:pointer; font-size:1rem; }
+    .input-group button:hover { background:#0c66c0; }
+    #result { margin-top:18px; padding:18px; background:#f0f7ff; border:1px solid #cfe0ff; border-radius:8px; display:none; }
+    #result img { max-width:260px; border-radius:6px; margin-top:10px; }
+    h2 { margin-top:34px; color:#0c1b3c; }
+    .platforms { display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; }
+    .platforms .plat { display:flex; align-items:center; gap:8px; background:#f5f6f8; padding:10px 12px; border-radius:6px; border:1px solid #e2e8f0; font-size:0.95rem; }
+    .platforms img { width:20px; height:20px; }
+    ul li { margin:8px 0; }
+    footer { background:#0c1b3c; color:#ddd; padding:26px 15px; text-align:center; margin-top:30px; }
+    footer a { color:#90b4ff; text-decoration:none; margin:0 6px; }
+    @media(max-width:720px){ .input-group { flex-direction:column; } #result img{ max-width:100%; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🔍 AI Verifier</h1>
+  <p>Free Video & Link Authenticity Checker — detect fake, altered, or AI-generated media</p>
+</header>
+
+<div class="container">
+  <div class="input-group">
+    <input id="urlInput" type="text" placeholder="Paste video or social link here (YouTube, TikTok, Instagram, X, Reddit)"/>
+    <button id="verifyBtn">Verify</button>
+  </div>
+
+  <div id="result" role="status" aria-live="polite"></div>
+
+  <h2>Supported Platforms</h2>
+  <div class="platforms">
+    <div class="plat"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/YouTube_icon_%282013-2017%29.png" alt="YouTube">YouTube</div>
+    <div class="plat"><img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Facebook_Logo.png" alt="Facebook">Facebook</div>
+    <div class="plat"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">Instagram</div>
+    <div class="plat"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="X">X</div>
+    <div class="plat"><img src="https://upload.wikimedia.org/wikipedia/en/4/4f/TikTok_logo.png" alt="TikTok">TikTok</div>
+    <div class="plat"><img src="https://upload.wikimedia.org/wikipedia/commons/7/76/Reddit_logo_and_wordmark.png" alt="Reddit">Reddit</div>
+    <div class="plat"><img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Vimeo_%282017%29.svg" alt="Vimeo">Vimeo</div>
+    <div class="plat"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Dailymotion_logo.svg" alt="Dailymotion">Dailymotion</div>
+    <div class="plat"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/SoundCloud_logo.svg" alt="SoundCloud">SoundCloud</div>
+    <div class="plat"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Threads_logo.svg" alt="Threads">Threads</div>
+  </div>
+
+  <h2>Why Choose AI Verifier?</h2>
+  <ul>
+    <li>✅ Deepfake & AI-generated content detection</li>
+    <li>✅ Phishing & unsafe link prevention</li>
+    <li>✅ Video originality & source validation</li>
+    <li>✅ Fast, secure & free verification</li>
+  </ul>
+
+  <h2>How It Works</h2>
+  <ol>
+    <li>Copy any video or social media link.</li>
+    <li>Paste it into the field above and press <strong>Verify</strong>.</li>
+    <li>We fetch metadata and run first-layer checks; see title, thumbnail, verdict and reasons.</li>
+  </ol>
+
+  <h2>Resources & Partners</h2>
+  <div style="margin-top:10px;">
+    <a href="#" style="color:#1e88e5; text-decoration:none; font-weight:600; margin-right:8px;">ssYouTube.com</a>
+    <a href="#" style="color:#1e88e5; text-decoration:none; font-weight:600; margin-right:8px;">iGram</a>
+    <a href="#" style="color:#1e88e5; text-decoration:none; font-weight:600;">SSSTik</a>
+  </div>
+
+</div>
+
+<footer>
+  <div>© 2025 AI Verifier | Safe Links, Real News</div>
+  <div style="margin-top:8px;">By using our service you accept our <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></div>
+  <div style="margin-top:8px;"><a href="#">API</a> | <a href="#">Contact</a></div>
+</footer>
+
+<script>
+  document.getElementById('verifyBtn').addEventListener('click', verifyLink);
+  document.getElementById('urlInput').addEventListener('keydown', function(e){ if(e.key==='Enter') verifyLink(); });
+
+  async function verifyLink(){
+    const url = document.getElementById('urlInput').value.trim();
+    const result = document.getElementById('result');
+    if(!url){ result.style.display='block'; result.innerHTML='<p style="color:#c62828">⚠️ Please paste a link first.</p>'; return; }
+    result.style.display='block';
+    result.innerHTML = '<p>⏳ Fetching metadata and running checks...</p>';
+
+    try {
+      const resp = await fetch('/.netlify/functions/verify?url=' + encodeURIComponent(url));
+      const data = await resp.json();
+      if(data.error){
+        result.innerHTML = '<p style="color:#c62828">❌ ' + data.error + '</p>';
+        return;
+      }
+      let html = `<p><strong>Title:</strong> ${data.title || 'N/A'}</p>`;
+      html += `<p><strong>Source:</strong> ${data.source || 'N/A'}</p>`;
+      if(data.thumbnail) html += `<img src="${data.thumbnail}" alt="thumbnail">`;
+      html += `<p><strong>Verdict:</strong> ${data.verdict || 'needs_review'}</p>`;
+      if(data.reason) html += `<p><strong>Reason:</strong> ${data.reason}</p>`;
+      html += `<p><a href="${url}" target="_blank">🔗 Open original link</a></p>`;
+      result.innerHTML = html;
+    } catch (err){
+      result.innerHTML = '<p style="color:#c62828">❌ Verification failed (network or function error).</p>';
+    }
+  }
+</script>
+
+</body>
+</html>

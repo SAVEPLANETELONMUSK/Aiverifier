@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Verifier - Safe Video Link Verification</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+/* Tooltip CSS */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  background-color: #111;
+  color: #fff;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</head>
+<body class="bg-gradient-to-b from-blue-50 to-white font-sans min-h-screen flex flex-col">
+
+<header class="bg-blue-600 text-white p-6 shadow-md">
+  <h1 class="text-4xl font-bold text-center">🔍 AI Verifier</h1>
+  <p class="text-center mt-1 text-lg">Safe Video Link Verification</p>
+</header>
+
+<main class="flex-grow flex flex-col items-center p-4">
+  <form method="POST" class="flex flex-col sm:flex-row gap-2 w-full max-w-lg mt-6">
+    <input type="text" name="url" placeholder="Paste video link here..." class="flex-1 p-3 border rounded-lg shadow focus:outline-none focus:border-blue-700">
+    <button type="submit" class="bg-blue-600 text-white px-4 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Verify</button>
+  </form>
+
+  <!-- Trusted platforms with tooltips -->
+  <div class="trusted-platforms mt-6 flex flex-wrap justify-center gap-4">
+    <div class="tooltip">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" class="h-12">
+        <span class="tooltiptext">YouTube</span>
+    </div>
+    <div class="tooltip">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg" alt="Facebook" class="h-12">
+        <span class="tooltiptext">Facebook</span>
+    </div>
+    <div class="tooltip">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" class="h-12">
+        <span class="tooltiptext">Instagram</span>
+    </div>
+    <div class="tooltip">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/X_logo.jpg" alt="X" class="h-12">
+        <span class="tooltiptext">X</span>
+    </div>
+  </div>
+
+  {% if result %}
+  <div class="verification-card mt-6 bg-white p-4 rounded-lg shadow-lg w-full max-w-lg text-center">
+    <h2 class="font-bold text-xl">
+      Status:
+      {% if result.human_ai == 'Human' %}
+        <span class="status-badge status-human" data-tooltip="Verified by AI Verifier. Safe to watch!">✅ Human-made</span>
+      {% else %}
+        <span class="status-badge status-ai" data-tooltip="Detected as AI-generated or altered. Be cautious!">⚠️ AI-generated</span>
+      {% endif %}
+    </h2>
+    {% if result.title %}<p><strong>Title:</strong> {{ result.title }}</p>{% endif %}
+    {% if result.description %}<p><strong>Description:</strong> {{ result.description }}</p>{% endif %}
+    {% if result.thumbnail %}<img src="{{ result.thumbnail }}" alt="Thumbnail" class="mt-2 rounded-lg shadow">{% endif %}
+    <a href="{{ result.url }}" target="_blank" class="mt-3 inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Continue to Video</a>
+  </div>
+  {% endif %}
+</main>
+
+<footer class="mt-10 text-center text-gray-700 text-sm">
+  Verification powered by AI Verifier | Protecting you against fake news, altered videos, and AI-generated content.<br>
+  © 2025 <strong>AI Verifier</strong> | Safe Links, Real News
+</footer>
+
+</body>
+</html>
